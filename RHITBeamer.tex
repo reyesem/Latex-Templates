@@ -1,0 +1,250 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: RHITBeamer
+% Description: Template for creating presentations using the RHITslides theme.
+%
+% Date: 27 Apr 2012
+% Modified:
+%
+% Notes:
+%   1. Created by Eric Reyes (Rose-Hulman Insitute of Technology).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Class Definition
+%   The beamer class is extremely flexible and useful for creating Latex 
+%   presentations. While other presentation classes exist, this one is easy to
+%   learn and very powerful.
+%
+%   The color scheme and style are part of the beamer theme RHITslides, which
+%   adheres to the university style guide. There are some things that are in 
+%   this template unique to this style file which are highlighted as we go.
+%
+% Options for RHITslides
+%   simpletoc: If specified, the table of contents will only contain the section
+%     names and omit the subsection and subsubsection names specified in the
+%     document.
+%   headline=empty: The headline is an empty box of a single color at the top
+%     of every slide (default).
+%   headline=navigation: A horizontal navigation consisting of the sections is
+%     listed in a single line. Note that subsections are not given. Since this
+%     appears in a single line, section names should be short and no more than
+%     four or five are recommended.
+%   headline=sectionsubsection: On the left, the current section is given, and
+%     on the right, the current subsection.
+%   headline=titlesection: On the left, the title of the talk is given in 
+%     italics, on the right, the current section.
+%   footline=empty: The footline is an empty box of a single color at the bottom
+%     of every slide (default).
+%   footline=logoauthordate: On the left, the logo is placed, in the center, the
+%     author, on the right the date and page number.
+%   footline=logodate: Same as logoauthordate, but no author is shown.
+%   footline=logoonly: Same as logodate, but not date or page number is given.
+%   footline=pageonly: In the far right corner, the page number is shown 
+%     (default).
+%   sidebar=navigation: No left sidebar. The right sidebar contains basic 
+%     navigation symbols (default).
+%   sidebar=none: No left or right sidebar.
+
+\documentclass{beamer}
+\usetheme[simpletoc,
+				 headline=titlesection,
+				 footline=logoauthordate,
+				 sidebar=navigation]{RHITslides}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Load Packages
+%   These additional packages control the layout and ability to use specific
+%   features. Include additional packages as needed.
+%
+%   1. amsmath,amsthm,amssymb:
+%        Allow the use of AMS mathematical symbols, theorem environments, and
+%        math commands.
+%   2. booktabs
+%        Tables have improved spacing for a more professional look.
+%   3. graphicx
+%        Allows more flexibility for importing graphics.
+\usepackage{amsmath,amsthm,amssymb,booktabs,graphicx}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set Document Information
+%   These pieces are used to create the title page slide and logo. Shorter
+%   versions (specified optionally) are used in the headers and footers.
+%
+%   The title graphic and logo are the official RHIT logo. In order to use it 
+%   properly, only the height or width should be set (but not both). Using
+%   two different ways of referring to the graphic allows for it to be resized
+%   on the front page. Also, to ensure proper placement in the footer, only
+%   totalheight should be specified and should be less than 4.75ex (the total
+%   height of the footer).
+\title[short title]{Official Title}
+\subtitle{the subtitle, if applicable}
+\author[short author]{Full Author Name}
+\institute[RHIT]{}
+\date[short date]{Official Location and Date}
+
+\titlegraphic{\includegraphics[width=0.5\textwidth]{RHIT_logo.png}}
+\logo{\includegraphics[totalheight=2.75ex]{RHIT_logo.png}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page and Outline
+%   You could specify \titlepage and \tableofcontents as in any other document.
+%   However, the RHITslides theme also provides two unique commands: \titlepg
+%   and \tocpg. These commands create the title page and table of contents page
+%   such that the header and footer do not contain all that information, which
+%   is unnecessary on these first two pages. In addition, these pages will not
+%   be numbered, and slide (1) will be the first slide following the table of
+%   contents. \outline takes one required parameter, the title for the page.
+%   If left empty, no title line is created. To get a blank title line, specify
+%   something like $\phantom{X}$.
+\begin{document}
+
+\titlepg
+
+\tocpg{Outline}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section I 
+%   A new section can be started using the \section command as usual. However,
+%   the RHITslides theme also proves the command \sectionpg. This command
+%   defines a new section AND creates a page to introduce the section. This is
+%   useful for making transitions in longer talks. The command takes one
+%   required argument, the section name (which will appear in the table of
+%   contents and in the header if specified). It also takes one optional
+%   argument, a longer version of the section name which will appear on the 
+%   introduction slide.
+\sectionpg[Longer Section I Name]{Section I Name}
+
+% A basic list
+\begin{frame}
+  \frametitle{A list}
+  \begin{itemize}
+    \item Items denoted by red balls.
+    \item Enumerate and Description environments similar.
+  \end{itemize}
+\end{frame}
+
+% A Table
+\begin{frame}
+	\frametitle{A Table}
+	\begin{center}
+		\begin{tabular}{lrr}\toprule
+			Column 1 & Column 2 & Column 3 \\ \midrule
+			entry 1 & entry 2 & entry 3 \\ \bottomrule
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section II
+\sectionpg[Longer Section II Name]{Section II Name}
+
+% A Block
+\begin{frame}
+  \frametitle{A Basic Block}
+  \begin{block}{Block Color Scheme}
+    Header is white text on red background, and the block body is a light grey
+    background with black text.
+  \end{block}
+  
+  {\usebeamercolor[fg]{structure} Specific words} can also be highlighted 
+  in this color using ``usebeamercolor'' command.
+\end{frame}
+
+% An Example
+\begin{frame}
+	\frametitle{An Example}
+	\begin{example}
+		The example block places the name ``Example'' in the header on a dark grey
+		background.  The block body is a light grey with black text.
+	\end{example}
+	
+	{\usebeamercolor[fg]{example text} Specific words} can also be highlighted for 
+	examples using ``usebeamercolor'' command.
+\end{frame}
+
+% An Alert
+\begin{frame}
+	\frametitle{An Alert}
+	\begin{alertblock}{Alert Color Scheme}
+		Header is white text on dark blue blackground, and the block body is a light
+		version of this blue with black text.
+	\end{alertblock}
+	
+	{\usebeamercolor[fg]{alerted text} Specific words} can also be highlighted for 
+	alerts using ``usebeamercolor'' command.
+\end{frame}
+
+% A Theorem
+\begin{frame}
+	\frametitle{A Theorem}
+	\begin{theorem}
+		Text goes here...
+	\end{theorem}
+	
+	\begin{proof}
+		Text goes here...
+	\end{proof}
+\end{frame}
+
+
+% This is just to highlight the effect of subsections on the presentation.
+\subsection{Subsection Title}
+\begin{frame}
+  \frametitle{Using References}
+  
+  Here are some references:~\cite{Example1ref} and~\cite{Example2ref}.
+\end{frame}
+
+ 
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References
+%   I don't use a new section for references because I don't want it to appear
+%   in the Outline. But, if you want it there, use \section or \sectionpg as
+%   usual.
+%
+%   Packages like natbib don't work with beamer. So, I just define references
+%   the hard way. Start it with \begin{thebibliography}{A} where A is the name
+%   of the bibitem with the longest title. 
+%
+%   Each bibitem has the form [how it looks in text]{ref name} citation text.
+%
+%   You can also include this in the appendix section, as I do here. Appendices
+%   do not appear in the outline.
+\appendix
+
+\section{References}
+\begin{frame}
+	\frametitle{References}
+	\begin{thebibliography}{Example 1 (2010)}
+	
+	\bibitem[Example 1 (2010)]{Example1ref}
+		AuthorLast~AuthorFirst.
+		\newblock Title goes here.
+		\newblock{\em Journal Name Here}, Vol:pages-pages, year.
+		
+	\bibitem[Example 2 (2010)]{Example2ref}
+		AuthorLast~AuthorFirst.
+		\newblock Title goes here.
+		\newblock{\em Journal Name Here}, Vol:pages-pages, year.
+	\end{thebibliography}
+\end{frame}
+
+\section{Appendix A}
+\begin{frame}
+	\frametitle{Slide in the Appendix}
+	
+	This slide is in Appendix A.
+\end{frame}
+
+\end{document}

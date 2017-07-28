@@ -1,0 +1,424 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: RHITslides
+% Description: Contains my personal header for constructing general Latex
+%              presentations through Beamer. This file constructs the RHIT
+%              color scheme used for my presentations.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition
+\ProvidesPackage{beamerthemeRHITslides}
+\mode<presentation>
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color Theme
+%   Use colors of RHIT found at http://www.rose-hulman.edu/styleguide/color.htm
+%   with some secondary colors of NCSU found at
+%   http://www.ncsu.edu/brand/category/color/
+
+%%% Define colors
+\selectcolormodel{RGB}
+
+% primary colors
+\definecolor{RHred}{RGB}{128,0,0}
+
+% secondary colors
+\definecolor{RHgrey}{RGB}{84,88,90}
+\definecolor{RHbeige1}{RGB}{222,205,99}
+\definecolor{RHmoss}{RGB}{108,87,27}
+\definecolor{RHgreen}{RGB}{61,68,30}
+\definecolor{RHltblue}{RGB}{167,188,214}
+\definecolor{RHdkblue}{RGB}{79,117,139}
+\definecolor{RHbeige2}{RGB}{223,209,167}
+\definecolor{RHorange}{RGB}{232,119,34}
+
+
+%%% Set color-palate
+% Structure
+\setbeamercolor{structure}{fg=RHred}
+\setbeamercolor{headings}{fg=white,bg=RHgrey}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=RHdkblue}
+\setbeamercolor{example text}{fg=RHgreen}
+\setbeamercolor{additional text}{fg=RHbeige1}
+
+% Inner pieces
+\setbeamercolor{block title}{use=structure,
+  fg=white,bg=structure.fg}
+\setbeamercolor{block title alerted}{use=alerted text,
+  fg=white,bg=alerted text.fg}
+\setbeamercolor{block title example}{use=example text,
+  fg=white,bg=example text.fg}
+
+\setbeamercolor{block body}{parent=normal text,
+  use=structure,bg=RHbeige1!20!bg}
+\setbeamercolor{block body alerted}{parent=normal text, 
+  use=block title alerted,bg=block title alerted.bg!10!bg}
+\setbeamercolor{block body example}{parent=normal text, 
+  use=block title example,bg=block title example.bg!10!bg}
+
+\setbeamercolor{bibliography item}{parent=item}
+\setbeamercolor{bibliography entry author}{parent=additional text}
+\setbeamercolor{bibliography entry title}{fg=black,bg=white}
+\setbeamercolor{bibliography entry location}{fg=black,bg=white}
+\setbeamercolor{bibliography entry note}{fg=black,bg=white}
+
+% Outer pieces
+\setbeamercolor*{titlelike}{fg=white, bg=RHgrey}
+\setbeamercolor*{header}{fg=white, bg=RHgrey}
+\setbeamercolor*{title in head/foot}{fg=white, bg=RHgrey}
+\setbeamercolor*{section in head/foot}{fg=white, bg=RHgrey}
+\setbeamercolor*{subsection in head/foot}{fg=white, bg=RHgrey}
+
+\setbeamercolor*{footer}{fg=white, bg=RHred}
+\setbeamercolor*{date in head/foot}{fg=white, bg=RHred}
+\setbeamercolor*{author in head/foot}{fg=white, bg=RHred}
+
+% Title Page
+\setbeamercolor{titlepg top}{bg=RHgrey, fg=white}
+\setbeamercolor{titlepg middle}{bg=white, fg=white}
+\setbeamercolor{titlepg bottom}{bg=RHred, fg=white}
+
+
+\setbeamercolor{frametitle}{fg=white,bg=RHgrey}
+\setbeamercolor{frametitle right}{fg=white,bg=RHgrey}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font Theme
+%   Titles should have bold font.
+\setbeamerfont*{title}{series=\bfseries, size=\Large}
+\setbeamerfont*{subtitle}{size=\large}
+\setbeamerfont*{author}{series=\bfseries, size=\large}
+\setbeamerfont*{date}{size=\small}
+\setbeamerfont*{institute}{size=\small}
+\setbeamerfont*{title in head/foot}{shape=\itshape}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inner Theme
+%   Based on the inner theme ROUNDED.
+%
+%   1. Boxes have rounded edges, without shadows.
+%   2. References marked by triangles.
+%   3. Table of Contents
+%        If the SIMPLETOC option is specified in the class definition, only
+%        sections are listed in the table of contents.
+%   4. Title Page
+%        Alter to have the appearance of the branded powerpoints.
+\useinnertheme[]{rounded}
+
+%% References
+\setbeamertemplate{bibliography item}[triangle]
+
+
+%% Table of Contents
+% simple
+\def\beamer@theme@toc@simple{%
+	\setbeamertemplate{subsection in toc}{}
+	\setbeamertemplate{subsubsection in toc}{}
+}
+
+
+%% Title Page
+\setbeamertemplate{title page}{%
+  \begin{centering}
+    \begin{beamercolorbox}[wd=\paperwidth, ht=0.55\paperheight, dp=0.15\paperheight, sep=8pt, center]{titlepg top}
+      \usebeamerfont{title}\inserttitle\par %
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}%
+          \usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+      \vskip1em
+      {\usebeamerfont{author} \insertauthor}
+      \ifx\insertinstitute\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{institute}%
+          \usebeamercolor[fg]{institute}\insertinstitute\par}%
+      \fi%
+      \ifx\insertdate\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{date}%
+          \usebeamercolor[fg]{date}\insertdate\par}%
+      \fi%
+    \end{beamercolorbox}%
+    \vspace{-1pt}
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2pt, center]{titlepg middle}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=0.2\paperheight, dp=0.1\paperheight, sep=8pt, center]{titlepg bottom}
+      \inserttitlegraphic
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Outer Theme
+%   Based on the outer theme SPLIT. 
+%
+%   1. Headline
+%        - empty: Headline is an empty box, creating a colored strip across the
+%            top of every slide (default).
+%        - navigation: Adds a horizontal navigation containing only the
+%            section names, not the subsections. Everything is on a single line.
+%        - sectionsubsection: Splits the headline into two pieces, on the left
+%            is the section, and on the right is the subsection. Everything is
+%            placed on a single line.
+%        - titlesection: Splits the headline into two pieces, on the left is
+%            the title, and on the right is the current section.
+%   2. Footline
+%        - empty: Footline is an empty box, creating a colored strip across the
+%            bottom of every slide (default).
+%        - logoauthordate: Splits the footline into three pieces, on the left
+%            is the RHIT logo, in the middle the author, and on the right the
+%            date and page number.
+%        - logodate: Splits the footline into two pieces, on the left is the 
+%            RHIT logo, and on the right is the date and page number.
+%        - logoonly: The logo is in the far left corner and nothing else is
+%            present.
+%        - pageonly: In the far right corner is the page number.
+%   3. Sidebars
+%        - navigation: No left sidebar. The right sidebar contains the generic
+%            navigation symbols (default).
+%        - none: No left or right sidebars.
+%   4. Logo
+%        Incorporated into the footline. 
+\useoutertheme{split}
+
+%% Headline
+\setbeamertemplate{headline}{%
+	\begin{beamercolorbox}[wd=\paperwidth,ht=3.75ex]{header}%
+	\end{beamercolorbox}%
+}
+
+% Headline = empty
+\def\beamer@theme@headline@empty{%
+	\setbeamertemplate{headline}{%
+		\begin{beamercolorbox}[wd=\paperwidth,ht=3.75ex]{header}%
+		\end{beamercolorbox}%
+	}%
+}
+
+% Headline = navigation
+\def\beamer@theme@headline@navigation{%
+	\setbeamertemplate{headline}{%
+		\begin{beamercolorbox}[sep=0.1cm]{section in head/foot}%
+			\insertsectionnavigationhorizontal{\paperwidth}{}{}
+		\end{beamercolorbox}%
+	}%
+}
+
+% Headline = sectionsubsection
+\def\beamer@theme@headline@sectionsubsection{%
+	\setbeamertemplate{headline}{%
+		\leavevmode%
+		\hbox{%
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.65ex,dp=1.1ex,left,
+				leftskip=0.1cm]{section in head/foot}%
+				\usebeamerfont{section in head/foot}\insertsection
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.65ex,dp=1.1ex,right,
+				rightskip=0.1cm]{subsection in head/foot}%
+				\usebeamerfont{subsection in head/foot}\insertsubsection
+			\end{beamercolorbox}%
+		}%
+	}%
+}
+
+% Headline = titlesection
+\def\beamer@theme@headline@titlesection{%
+	\setbeamertemplate{headline}{%
+		\leavevmode%
+		\hbox{%
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.65ex,dp=1.1ex,left,
+				leftskip=0.1cm]{title in head/foot}%
+				\usebeamerfont{title in head/foot}\insertshorttitle
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.65ex,dp=1.1ex,right,
+				rightskip=0.1cm]{section in head/foot}%
+				\usebeamerfont{section in head/foot}\insertsection
+			\end{beamercolorbox}%
+		}%
+	}%
+}
+
+
+%% Footline
+\setbeamertemplate{footline}{%
+	\begin{beamercolorbox}[wd=\paperwidth,dp=1.5ex,ht=3.25ex,right,leftskip=1.5ex]{date in head/foot}%
+		\usebeamerfont{date in head/foot}(\insertframenumber)
+	\end{beamercolorbox}%
+}
+
+% Footline = empty
+\def\beamer@theme@footline@empty{%
+  \setbeamertemplate{footline}{%
+    \begin{beamercolorbox}[wd=\paperwidth,dp=1.5ex,ht=3.25ex,left]{footer}%
+    \end{beamercolorbox}%
+  }
+}
+
+% Footline = logoauthordate
+\def\beamer@theme@footline@logoauthordate{%
+	\setbeamertemplate{footline}{%
+		\leavevmode%
+		\hbox{%
+			\begin{beamercolorbox}[wd=.33\paperwidth,dp=1.5ex,ht=3.25ex,left,leftskip=1.5ex]{footer}%
+				\vspace{-0.5ex}\insertlogo
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.34\paperwidth,dp=1.5ex,ht=3.25ex,center]{author in head/foot}%
+				{\usebeamerfont{author in head/foot}\insertshortauthor}
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.33\paperwidth,dp=1.5ex,ht=3.25ex,right,rightskip=1.5ex]{date in head/foot}%
+				{\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{1ex}
+				(\insertframenumber)}
+			\end{beamercolorbox}%
+		}%
+	}%
+}
+	
+% Footline = logodate
+\def\beamer@theme@footline@logodate{%
+	\setbeamertemplate{footline}{%
+		\leavevmode%
+		\hbox{%
+			\begin{beamercolorbox}[wd=.5\paperwidth,dp=1.5ex,ht=3.25ex,left,leftskip=1.5ex]{footer}%
+				\vspace{-0.5ex}\insertlogo
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.5\paperwidth,dp=1.5ex,ht=3.25ex,right,rightskip=1.5ex]{date in head/foot}%
+				{\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{1ex}
+				(\insertframenumber)}
+			\end{beamercolorbox}%
+		}%
+	}%
+}
+
+% Footline = logoonly
+\def\beamer@theme@footline@logoonly{%
+	\setbeamertemplate{footline}{%
+		\begin{beamercolorbox}[wd=\paperwidth,dp=1.5ex,ht=3.25ex,left,leftskip=1.5ex]{footer}%
+			\vspace{-0.5ex}\insertlogo
+		\end{beamercolorbox}%
+	}%
+}
+
+% Footline = pageonly
+\def\beamer@theme@footline@pageonly{%
+	\setbeamertemplate{footline}{%
+		\begin{beamercolorbox}[wd=\paperwidth,dp=1.5ex,ht=3.25ex,right,rightskip=1.5ex]{date in head/foot}%
+			{\usebeamerfont{date in head/foot}(\insertframenumber)}
+		\end{beamercolorbox}%
+	}
+}
+
+
+%% Sidebar
+\setbeamertemplate{navigation symbols}{%
+  \hbox{%
+    \hbox{\insertslidenavigationsymbol}
+    \hbox{\insertsectionnavigationsymbol}
+    \hbox{\insertsubsectionnavigationsymbol}
+  }%
+}
+	
+\setbeamertemplate{sidebar right}{%
+	\vfill
+	\llap{%
+		\usebeamertemplate***{navigation symbols}\hskip0.1cm
+	}%
+	\vskip5pt
+}
+
+% Sidebar = navigation
+\def\beamer@theme@sidebar@navigation{%
+	\setbeamertemplate{sidebar right}{%
+		\vfill
+		\llap{%
+			\usebeamertemplate***{navigation symbols}\hskip0.1cm
+		}%
+		\vskip5pt
+	}
+}
+
+% Sidebar = none
+\def\beamer@theme@sidebar@none{%
+	\setbeamertemplate{sidebar right}{%
+	}%
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional Commands
+%   1. Declare and process the class options.
+%   2. Set the beamer default size.
+%   3. \sectionpg
+%        Defines a new section that includes a page introducing that section.
+%        This is especially useful for making transitions during long talks.
+%   4. \titlepg
+%        Defines the title page without using headers and footers.
+%   5. \tocpg
+%        Defines the table of contents page without using headers and footers.
+
+%% Declare Options
+\DeclareOptionBeamer{simpletoc}{\beamer@theme@toc@simple}
+\DeclareOptionBeamer{headline}{\csname beamer@theme@headline@#1\endcsname}
+\DeclareOptionBeamer{footline}{\csname beamer@theme@footline@#1\endcsname}
+\DeclareOptionBeamer{sidebar}{\csname beamer@theme@sidebar@#1\endcsname}
+\ProcessOptionsBeamer
+
+
+%% Set Beamer Size
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+
+%% Command: \sectionpg
+\newcommand{\sectionpg}[2][\DefaultOpt]{%
+	\def\DefaultOpt{#2}%
+	\section{#2}
+	\begin{frame}
+		\frametitle{$\phantom{X}$}
+		\vfill
+		\begin{centering}
+			\begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,
+				shadow=false]{title}
+				\usebeamerfont{title} #1
+			\end{beamercolorbox}
+		\end{centering}
+		\vfill
+	\end{frame}
+}
+
+
+%% Command: \titlepg
+\newcommand{\titlepg}{%
+	{\setbeamercolor*{background canvas}{bg=structure.fg}
+    \setbeamercolor{headings}{bg=structure.fg}
+	\begin{frame}[plain]
+		\titlepage
+	\end{frame}
+	\addtocounter{framenumber}{-1}}
+}
+
+
+%% Command: \tocpg
+\newcommand{\tocpg}[1]{%
+	{\beamer@theme@headline@empty
+	\beamer@theme@footline@logoonly
+	\begin{frame}
+		\frametitle{#1}
+		\tableofcontents
+	\end{frame}
+	\addtocounter{framenumber}{-1}}
+}
