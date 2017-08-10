@@ -1,0 +1,176 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: RHITletter
+% Description: Contains the style file for constructing a letter on RHIT
+%              letterhead using pdflatex.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Class Definition
+%   This is meant to be used with the letter document class.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{RHITletter}[2012/04/28 RHIT Mathematics Letterhead]
+\RequirePackage[pdftex]{graphicx}
+\RequirePackage{fancyhdr}
+\RequirePackage[
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=black,
+	urlcolor=black]{hyperref}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Commands
+%   1. Class Option: RHITheader
+%        If specified, the RHIT header (assumed to be a graphic entitled
+%        RHIT_header.pdf in the same directory) is used. Otherwise, no header
+%        is included. Not specifying this option will result in a letter that
+%        has the proper margins to be printed on the university letterhead.
+%   2. Commands
+%        A command for the email address, title, and website of the sender,
+%        as well as the subject of the letter, spacing for the signature line.
+%        The defaults for these are set.
+
+% Class Option: RHITheader
+\def\rhitlogo{ }
+\DeclareOption{RHITheader}{\def\rhitlogo{%
+	\hspace*{-1.1875in} \includegraphics[width=\paperwidth]{RHIT_header.pdf}}}
+\ProcessOptions
+
+% Commands: 
+%   Commands previously defined include the following:
+%   name (\fromname), signature (\fromsig), address (\fromaddress),
+%   location (\fromlocation), telephone (\telephonenum), cc, encl,
+%   longindentation, ps, ccname, enclname,
+\newcommand*{\emailname}[1]{\def\fromemailname{#1}}
+\newcommand*{\email}[1]{\def\fromemail{#1}}
+\newcommand*{\position}[1]{\def\fromtitle{#1}}
+\newcommand*{\webname}[1]{\def\fromwebname{#1}}
+\newcommand*{\website}[1]{\def\fromweb{#1}}
+\newcommand*{\subjname}[1]{\def\subjectname{#1}}
+\newcommand*{\subject}[1]{\def\lettersubj{#1}}
+\newcommand*{\sigimage}[1]{\def\signatureimage{#1}}
+\newcommand*{\phonename}[1]{\def\fromphonename{#1}}
+
+
+\name{}
+\position{}
+\address{}
+\location{}
+\phonename{Phone:}
+\telephone{}
+\emailname{Email:}
+\email{}
+\webname{Web:}
+\website{}
+
+\subjname{Subject:}
+\subject{}
+
+\longindentation=0in
+\sigimage{}
+\signature{}
+
+\renewcommand*{\ccname}{cc}
+\renewcommand*{\enclname}{enclosures}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Margins
+%   These margins are specified by the university in the university style 
+%   guide.
+
+\paperheight=11in
+\paperwidth=8.5in
+
+\hoffset=0in
+\oddsidemargin=0.1875in
+\evensidemargin=0.1875in
+\textwidth=6.8125in
+
+\voffset=0in
+\topmargin=-1in
+\headheight=1.5in
+\headsep=0in
+\textheight=8in
+\footskip=0.5in
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specify Letter
+
+% Default Address
+\def\completeaddress{%
+	\ifx\fromname\@empty \else \fromname \\ \fi
+	\ifx\fromtitle\@empty \else \fromtitle \\ \fi
+	\ifx\fromaddress\@empty \else \fromaddress \\ \fi
+	\ifx\fromlocation\@empty \else \fromlocation \\ \fi
+	\ifx\telephonenum\@empty \else {\fromphonename} \telephonenum \\ \fi
+	\ifx\fromemail\@empty \else {\fromemailname} \fromemail \\ \fi
+	\ifx\fromweb\@empty \else {\fromwebname} \fromweb \\ \fi
+}
+
+
+% Redefine Opening
+\renewcommand*{\opening}[1]{%
+	\ifx\@empty\completeaddress
+		\@date\par
+  		\else%
+			\vspace*{-0.25in}
+    		{\raggedleft%
+				\begin{tabular}{l@{}}\ignorespaces
+      			\completeaddress \\*[2\parskip]
+				\end{tabular} \par} %
+		\@date\par
+  \fi
+  \vspace{2\parskip}%
+  {\raggedright \toname \\ \toaddress \par}%
+  \ifx\lettersubj\@empty \else
+  		\vspace{2\parskip}%
+		{\em \subjectname} \lettersubj \par
+	\fi 
+  \vspace{2\parskip}%
+  #1\par\nobreak
+}
+
+% Redefine Closing
+\renewcommand{\closing}[1]{%
+	\par\nobreak\vspace{\parskip}%
+  \stopbreaks%
+  \noindent%
+  \hspace*{\longindentation}%
+  \parbox{\indentedwidth}{%
+  		\raggedright
+		\ifx\@empty\signatureimage
+			\ignorespaces #1 \\ [6\medskipamount]%
+			\else
+			\ignorespaces #1 \\ \signatureimage \\%
+		\fi
+    \ifx\@empty\fromsig \fromname \else
+       \fromsig 
+    \fi\strut}%
+  \par
+}
+
+% Only Number Pages 2 On
+\def\displaypage{%
+	\ifnum \c@page >1 \thepage
+		\else \hspace*{0.1in}
+	\fi
+}
+
+% Define Page Style
+\pagestyle{fancy}
+\lhead{\rhitlogo}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\displaypage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}

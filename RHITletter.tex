@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: RHITletter.tex
+% Description: Template for creating letter on RHIT letterhead.
+%
+% Date:
+% Modified:
+%
+% Notes:
+%   1. Created by Eric Reyes (Rose-Hulman Insitute of Technology).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Class Definition
+%   The RHITletter style is based on the letter document class.
+%
+%   Packages:
+%     lipsum: This package is used only for demonstration. It allows us to
+%       generically fill out the letter to show formatting.
+%     RHITletter: Sets up the letter according to the university style guide.
+%
+%   Options:
+%     RHITheader: Includes the file RHIT_header.jpg at the top of the page.
+%       This creates the letterhead for the department of interest.
+%
+%   NOTE:
+%     According to the university style guide, all communications should be
+%     set in the verdana font. This is not standard in Latex. This font could
+%     be installed with some work (see CTAN packages and directions). However,
+%     it has been my experience that often letters can be typeset using other
+%     fonts without causing a fuss.
+
+\documentclass[9pt]{letter}
+\usepackage{lipsum}
+\usepackage[RHITheader]{RHITletter}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Letter Information
+%   These commands provide details regarding the letter itself. In addition to
+%   those listed below, you could also change the following:
+%
+%   phonename (Phone:), emailname (Email:), webname (Web:), subjname (Subject:) 
+
+\name{Sender Name}
+\position{Sender Title}
+\address{Sender Address}
+\location{Sender Location (often blank)}
+\telephone{555.555.5555}
+\email{\href{mailto:email@rose-hulman.edu}{email@rose-hulman.edu}}
+\website{\href{http://www.rose-hulman.edu/~username}
+	{http://www.rose-hulman.edu/$\sim$username}}
+
+\subject{Subject of Letter (if applicable)}
+\date{Todays Date}
+
+\signature{Senders Signature Line \\ Possibly Title}
+
+% If a graphics file contains a signature for inclusion, can include a
+% command similar to \sigimage{\includegraphics[height=0.25in]{file.jpg}}
+
+% Can also include \renewcommand*{\ccname}{cc name} (cc),
+% \renewcommand*{\enclname}{enclosure name} (enclosures), and longindentation
+% (0in) to change how add-ons look.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin Letter
+%   You need both the \begin{document} and \begin{letter} commands. The 
+%   argument for the letter command is the Recipients name and address.
+
+\begin{document}
+\begin{letter}{%
+	Recipient Name \\ 
+	Recipient Address 1 \\ 
+	Recipient Address 2}
+	
+% Opening line
+\opening{Opening Line,}
+
+% Body of letter
+\lipsum
+
+\lipsum
+
+% Closing
+\closing{Closing Line,}
+
+% Add-ons
+\cc{(if cc applicable)}
+\encl{(if enclosures)}
+\ps{(if ps applicable)}
+
+\end{letter}
+\end{document}

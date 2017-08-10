@@ -1,0 +1,244 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: RHITposter
+% Description: Contains the style file for constructing a poster using RHIT
+%              color scheme.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition
+%   RHITslides has a color scheme consistent with RHIT. It is primarily for use
+%   in presentation mode.
+\ProvidesPackage{beamerthemeRHITposter}
+\mode<presentation>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inner Theme
+%   Control the way blocks look.
+
+%% Begin Block
+\setbeamertemplate{block begin}{%
+	\par\vskip\medskipamount%
+	\begin{beamercolorbox}[rounded=false,shadow=false,left,
+		colsep*=.5ex,sep=.25ex]{block title}%
+		\usebeamerfont*{block title} \insertblocktitle
+	\end{beamercolorbox}%
+	{\parskip0pt}%
+	{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+	\usebeamerfont{block body}%
+	\begin{beamercolorbox}[rounded=false,shadow=false,left,leftskip=1.5ex,
+		rightskip=1.5ex,colsep*=.5ex,sep=.25ex,vmode]{block body}
+		\ifbeamercolorempty[bg]{block body}{\vskip-1ex}{\vskip-1ex}\vbox{}%
+}
+
+
+%% End Block
+\setbeamertemplate{block end}{%
+	\end{beamercolorbox}\vskip\medskipamount
+}
+
+
+%% Bibliography
+\setbeamertemplate{bibliography item}{%
+	\hspace*{1ex}
+	\usebeamercolor{bibliography item} \insertbiblabel
+}
+
+
+%% Itemize Items
+\setbeamertemplate{itemize item}[circle]
+\setbeamercolor{itemize item}{fg=black}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Outer Theme
+%   Based on the outer theme SHADOW. 
+%
+%   1. Sidebars
+%        No sidebars or navigation symbols.
+%   2. Headline
+%        Contains the logo, title, author, and institution for the poster.
+%   3. Footline
+%        Contains the conference (date), website, and email for contact.
+
+%% Sidebars
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{sidebar right}{}
+
+
+%% Headline
+\setbeamertemplate{headline}{%
+\ifx\insertsubtitle\@empty%
+\hbox{%
+\begin{beamercolorbox}[wd=0.2\paperwidth, ht=30ex, left, leftskip=5ex]{headline}%
+	\vbox to30ex{\vfil\hbox{\insertlogo}\vfil}%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.8\paperwidth, ht=30ex, vmode, ignorebg]{headline}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=14ex, left, leftskip=0ex]{title in headline}%
+	\vbox to14ex{\vfil\hbox{\usebeamerfont{title in headline} \inserttitle}\vfil}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=8ex, left, leftskip=2ex]{author in headline}%
+	\vbox to8ex{\vfil\hbox{\usebeamerfont{author in headline} \insertauthor}\vfil}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=8ex, left, leftskip=2ex]{institute in headline}%
+	\vbox to8ex{\vfil\hbox{\usebeamerfont{institute in headline} \insertinstitute}\vfil}%
+	\end{beamercolorbox}%
+\end{beamercolorbox}%
+}%
+\else%
+\hbox{%
+\begin{beamercolorbox}[wd=0.2\paperwidth, ht=42ex, left, leftskip=5ex]{headline}%
+	\vbox to42ex{\vfil\hbox{\insertlogo}\vfil}%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.8\paperwidth, ht=30ex, vmode, ignorebg]{headline}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=14ex, left]{title in headline}%
+	\vbox to14ex{\vfil\hbox{\usebeamerfont{title in headline} \inserttitle}\vfil}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=14ex, left]{title in headline}%
+	\vbox to14ex{\vfil\hbox{\usebeamerfont{title in headline} \insertsubtitle}\vfil}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=8ex, left]{author in headline}%
+	\vbox to8ex{\vfil\hbox{\usebeamerfont{author in headline} \insertauthor}\vfil}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=0.8\paperwidth, ht=8ex, left]{institute in headline}%
+	\vbox to8ex{\vfil\hbox{\usebeamerfont{institute in headline} \insertinstitute}\vfil}%
+	\end{beamercolorbox}%
+\end{beamercolorbox}%
+}%
+\fi%
+}
+
+
+%% Footline
+\setbeamertemplate{footline}{%
+\hbox{%
+\begin{beamercolorbox}[wd=0.3\paperwidth, ht=7.25ex, left, leftskip=5ex]{date in footline}%
+\vbox to7.25ex{\vfil\hbox{\usebeamerfont{date in footline} \insertdate} \vfil}%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.4\paperwidth, ht=7.25ex, center]{website in footline}%
+\vbox to 7.25ex{\vfil\hbox{\usebeamerfont{website in footline} \insertwebsite} \vfil}%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.3\paperwidth, ht=7.25ex, right, rightskip=7ex]{email in footline}%
+\vbox to 7.25ex{\vfil\hbox{\usebeamerfont{email in footline} \insertemail} \vfil}%
+\end{beamercolorbox}%
+}%
+}
+
+% buffer
+\def\poster@footline@buffer{%
+	\addtobeamertemplate{footline}{%
+		\begin{beamercolorbox}[wd=\paperwidth,ht=5ex]{normal text}%
+		\end{beamercolorbox}%
+	}{}%
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color Theme
+%   Use colors of RHIT found at http://www.rose-hulman.edu/styleguide/color.htm
+%   with some secondary colors of NCSU found at
+%   http://www.ncsu.edu/brand/category/color/
+
+%%% Define colors
+\selectcolormodel{RGB}
+
+% primary colors
+\definecolor{RHred}{RGB}{128,0,0}
+
+% secondary colors
+\definecolor{RHgrey}{RGB}{84,88,90}
+\definecolor{RHbeige1}{RGB}{222,205,99}
+\definecolor{RHmoss}{RGB}{108,87,27}
+\definecolor{RHgreen}{RGB}{61,68,30}
+\definecolor{RHltblue}{RGB}{167,188,214}
+\definecolor{RHdkblue}{RGB}{79,117,139}
+\definecolor{RHbeige2}{RGB}{223,209,167}
+\definecolor{RHorange}{RGB}{232,119,34}
+
+
+%%% Set color-palate
+% Structure
+\setbeamercolor{structure}{fg=white,bg=RHred}
+\setbeamercolor{headings}{fg=RHred,bg=white}
+\setbeamercolor{normal text}{fg=black,bg=RHgrey}
+\setbeamercolor{alerted text}{fg=RHred}
+\setbeamercolor{example text}{fg=RHgrey}
+
+% Inner pieces
+\setbeamercolor{block title}{parent=headings}
+\setbeamercolor{block body}{fg=black,bg=white}
+
+% Outer pieces
+\setbeamercolor{headline}{parent=structure}
+\setbeamercolor{title in headline}{parent=structure}
+\setbeamercolor{subtitle in headline}{parent=structure}
+\setbeamercolor{author in headline}{parent=structure}
+\setbeamercolor{institute in headline}{parent=structure}
+
+\setbeamercolor{footline}{parent=structure}
+\setbeamercolor{date in footline}{parent=structure}
+\setbeamercolor{website in footline}{parent=structure}
+\setbeamercolor{email in footline}{parent=structure}
+
+\setbeamercolor{bibliography item}{use=block body,fg=block body.fg,
+	bg=block body.bg}
+\setbeamercolor{bibliography entry author}{use=block body,fg=block body.fg,
+  bg=block body.bg}
+\setbeamercolor{bibliography entry title}{use=block body,fg=block body.fg,
+  bg=block body.bg}
+\setbeamercolor{bibliography entry location}{use=block body,fg=block body.fg,
+  bg=block body.bg}
+\setbeamercolor{bibliography entry note}{use=block body,fg=block body.fg,
+  bg=block body.bg}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font Theme
+%   Titles should have bold font.
+
+\setbeamerfont{title in headline}{size=\Huge,series=\bfseries}
+\setbeamerfont{subtitle in headline}{parent=title in headline}
+\setbeamerfont*{author in headline}{size=\LARGE,series=\mdseries}
+\setbeamerfont*{institute in headline}{parent=author in headline}
+
+\setbeamerfont*{date in footline}{size=\Large,series=\mdseries}
+\setbeamerfont*{website in footline}{size=\Large,series=\mdseries,
+	family=\ttfamily}
+\setbeamerfont*{email in footline}{parent=website in footline}
+
+\setbeamerfont{block title}{size=\Large,series=\bfseries}
+\setbeamerfont*{block body}{parent=normal text}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional Commands
+%   1. Declare options for beamer.
+%   2. Set beamer default size.
+
+%% Package Options
+\DeclareOptionBeamer{buffer}{\poster@footline@buffer}
+\ProcessOptionsBeamer
+
+
+%% Extra Commands & Defaults
+\newcommand*{\website}[1]{\def\insertwebsite{#1}}
+\newcommand*{\email}[1]{\def\insertemail{#1}}
+
+\website{}
+\email{}
+\date{}
+
+
+%% Set Beamer Size
+\setbeamersize{text margin left=5ex,text margin right=5ex}
+
+\AtBeginDocument{%
+  \setlength{\leftmargini}{\dimexpr\leftmargini + 2.5ex\relax}
+  \setlength{\labelsep}{\dimexpr\labelsep + 0.5ex\relax}
+}
